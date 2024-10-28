@@ -1,0 +1,42 @@
+server:
+  port: 8020           # Puerto para la aplicación
+  servlet:
+    context-path: /api  # Contexto base para los endpoints
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ias_db  # URL para la base de datos MySQL
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver      # Driver para MySQL
+
+  jpa:
+    hibernate:
+      ddl-auto: update           # O "validate" para producción
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true               # Muestra las consultas SQL en consola
+
+#  flyway:
+#    enabled: true
+#    locations: classpath:db/migration  # Ubicación de las migraciones
+
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG           # Nivel de logging específico para tus paquetes
+
+# Configuración de Actuator (opcional, para monitoreo)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info                        # Habilita los endpoints de health y info para monitoreo
+
+#jwt:
+#  secret: mySecretKey            # Clave secreta para JWT
+#  expiration: 3600000            # Duración de la validez del token (en ms)
